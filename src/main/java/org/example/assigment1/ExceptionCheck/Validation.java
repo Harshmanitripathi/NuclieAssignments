@@ -1,4 +1,4 @@
-package ExceptionCheck;
+package org.example.assigment1.ExceptionCheck;
 
 
 import java.util.*;

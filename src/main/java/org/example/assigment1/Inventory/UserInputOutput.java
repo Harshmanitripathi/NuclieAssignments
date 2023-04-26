@@ -1,6 +1,6 @@
 package Inventory;
 
-import ExceptionCheck.Validation;
+import org.example.assigment1.ExceptionCheck.Validation;
 import Products.ProductDetails;
 
 import java.util.*;
