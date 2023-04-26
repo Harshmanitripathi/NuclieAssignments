@@ -1,46 +1,51 @@
-package Inventory;
-
+package org.example.assigment1.Inventory;
 import org.example.assigment1.ExceptionCheck.Validation;
-import Products.ProductDetails;
+import org.example.assigment1.Products.ProductDetails;
 
 import java.util.*;
 import java.util.List;
-
 public class UserInputOutput {
-
     static List<ProductDetails> item = new ArrayList<ProductDetails>();
-
+    static ProductDetails productDetails;
     public static void takeItemDetails() {
         Scanner sc = new Scanner(System.in);
-        String nameOfItem="",priceOfItem="",quantityOfItem="",typeOfItem="";
-        while (true){
+        String nameOfItem="";double priceOfItem=0;int quantityOfItem=0;String typeOfItem="";
+        double priceOfItemIncludingTax=0.00, taxOnItem=0.00;
+        while (true) {
             if (item.size() >= 1){
                 System.out.println("Do you want to enter new Item (Y/N)");
                 String decisionTaken = sc.next();
-                if (decisionTaken.equalsIgnoreCase("n")){
+                if (decisionTaken.equalsIgnoreCase("n")) {
                     break;
                 }
             }
-
             while(true) {
                 System.out.println("Enter the name of item you want to enter");
-                nameOfItem = sc.next();
-                if (Validation.validateForName(nameOfItem)){
+                    nameOfItem = sc.next();
+                if (Validation.validateForName(nameOfItem)) {
                     break;
                 }
             }
             while (true) {
                 System.out.println("Enter the price of item");
-                priceOfItem = sc.next();
-                if (Validation.validateUserInputForBadInput(priceOfItem)){
-                    break;
+                try {
+                    priceOfItem = Double.parseDouble(sc.next());
+                    if (priceOfItem > 0) {
+                        break;
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
             while (true) {
                 System.out.println("Enter the quantity of item");
-                quantityOfItem = sc.next();
-                if (Validation.validateUserInputForBadInput(quantityOfItem)){
-                    break;
+                try {
+                    quantityOfItem = Integer.parseInt(sc.next());
+                    if (quantityOfItem > 0) {
+                        break;
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
             while (true) {
@@ -56,17 +61,18 @@ public class UserInputOutput {
                 System.out.println("Enter valid input for item type");
 
             }
-            priceOfItem = CalculateTaxes.calculateTax(typeOfItem,priceOfItem,quantityOfItem);
-            ProductDetails productDetails = new ProductDetails(nameOfItem,priceOfItem,quantityOfItem,typeOfItem);
+            priceOfItemIncludingTax = CalculateTaxes.calculateTax(typeOfItem,priceOfItem,quantityOfItem);
+            taxOnItem = priceOfItemIncludingTax - priceOfItem*quantityOfItem;
+            productDetails = new ProductDetails(nameOfItem,priceOfItem,quantityOfItem,typeOfItem);
             item.add(productDetails);
         }
         System.out.println("Displaying the list of items");
-        showItemsListed();
+        showItemsListed(priceOfItemIncludingTax,taxOnItem);
     }
-    public static void showItemsListed(){
-        System.out.println("ItemName \t ItemPrice \t Itemquantity \t ItemType");
+    public static void showItemsListed(double priceOfItemIncludingTax, double taxOnItem){
+        System.out.println("ItemName \t ItemPrice \t TaxOnItem \t TotalPrice");
         for (ProductDetails items: item) {
-            System.out.println(items.getItemName()+"\t \t"+items.getItemPrice()+"\t \t \t"+items.getItemquantity()+"\t \t \t \t"+items.getItemtype());
+            System.out.println(items.getItemName()+"\t \t"+items.getItemPrice()+"\t \t"+taxOnItem+"\t \t \t"+priceOfItemIncludingTax);
             System.out.println();
         }
     }

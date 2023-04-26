@@ -1,7 +1,7 @@
-package Products;
+package org.example.assigment1.Products;
 
 public class ProductDetails {
-    String itemName,itemPrice,itemquantity,itemtype;
+    String itemName;double itemPrice;int itemquantity; String itemtype;
 
     public String getItemName() {
         return itemName;
@@ -11,19 +11,19 @@ public class ProductDetails {
         this.itemName = itemName;
     }
 
-    public String getItemPrice() {
+    public double getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(String itemPrice) {
+    public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
     }
 
-    public String getItemquantity() {
+    public int getItemquantity() {
         return itemquantity;
     }
 
-    public void setItemquantity(String itemquantity) {
+    public void setItemquantity(int itemquantity) {
         this.itemquantity = itemquantity;
     }
 
@@ -35,10 +35,16 @@ public class ProductDetails {
         this.itemtype = itemtype;
     }
 
-    public ProductDetails(String itemName, String itemPrice, String itemquantity, String itemtype) {
+    public ProductDetails(String itemName, double itemPrice, int itemquantity, String itemtype) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemquantity = itemquantity;
         this.itemtype = itemtype;
+    }
+    public String toStringName() {
+        return this.getItemName()+"\t \t";
+    }
+    public double toStringItemPrice() {
+        return this.getItemPrice();
     }
 }

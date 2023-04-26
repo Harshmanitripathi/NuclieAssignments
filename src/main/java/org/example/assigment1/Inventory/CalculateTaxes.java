@@ -1,21 +1,22 @@
-package Inventory;
+package org.example.assigment1.Inventory;
+
+import java.text.DecimalFormat;
 
 public class CalculateTaxes {
-
-    public static String calculateTax(String typeOfItem, String priceOfItem, String quantityOfITem) {
-
+//    objectForReducingToTwoDecimalPlaces object of class DecimalFormat is used to convert double value to 2 decimal places
+    private static final DecimalFormat objectForReducingToTwoDecimalPlaces = new DecimalFormat("0.00");
+    public static double calculateTax(String typeOfItem, double priceOfItem, int quantityOfITem) {
+        double priceWithAddedTax=0.00;
         if (typeOfItem.equalsIgnoreCase("Raw")){
-            double priceWithAddedTax = Double.parseDouble(priceOfItem) * Integer.parseInt(quantityOfITem);
+            priceWithAddedTax = priceOfItem * quantityOfITem;
             priceWithAddedTax = (priceWithAddedTax * 1.125);
-            return String.valueOf(priceWithAddedTax);
         }
         else if (typeOfItem.equalsIgnoreCase("Manufactured")){
-            double priceWithAddedTax = Double.parseDouble(priceOfItem) * Integer.parseInt(quantityOfITem);
+            priceWithAddedTax = priceOfItem * quantityOfITem;
             priceWithAddedTax = ((priceWithAddedTax * .125) + priceWithAddedTax)*1.02;
-            return String.valueOf(priceWithAddedTax);
         }
         else if (typeOfItem.equalsIgnoreCase("Imported")){
-            double priceWithAddedTax = Double.parseDouble(priceOfItem) * Integer.parseInt(quantityOfITem);
+            priceWithAddedTax = priceOfItem * quantityOfITem;
             priceWithAddedTax = priceWithAddedTax * 1.10;
             if (priceWithAddedTax <=100){
                 priceWithAddedTax += 5;
@@ -26,8 +27,8 @@ public class CalculateTaxes {
             else {
                 priceWithAddedTax = (priceWithAddedTax * 1.05);
             }
-            return String.valueOf(priceWithAddedTax);
+
         }
-        return "Not valid type of Item entered";
+        return Double.parseDouble(objectForReducingToTwoDecimalPlaces.format(priceWithAddedTax));
     }
 }
