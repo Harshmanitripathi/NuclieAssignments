@@ -1,4 +1,4 @@
-package StudentPackage;
+package org.example.assignment2.exceptionhandling;
 
 public class IoException extends Exception{
     String errorInputOutputFile;

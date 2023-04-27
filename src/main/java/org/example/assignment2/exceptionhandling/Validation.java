@@ -1,9 +1,9 @@
-package StudentPackage;
+package org.example.assignment2.exceptionhandling;
 import java.util.*;
 public class Validation extends Exception{
 
 
-    static boolean validateUserInputForBadInput(String valueToValidate){
+    public static boolean validateUserInputForBadInput(String valueToValidate){
         boolean check=true;
             try {
 
@@ -25,7 +25,7 @@ public class Validation extends Exception{
         }
 
 
-    static boolean validateUserInputForNotvalidLength(String valueToValidate, String countForuser){
+    public static boolean validateUserInputForNotvalidLength(String valueToValidate, String countForuser){
         boolean check=true;
         Scanner sc = new Scanner(System.in);
         try{
@@ -43,7 +43,7 @@ public class Validation extends Exception{
         return check;
     }
 
-    static boolean validateForName(String nameOfStudent,int i){
+    public static boolean validateForName(String nameOfStudent, int i){
         boolean check = true;
        try{
                 if (nameOfStudent.charAt(0) >= '0' && nameOfStudent.charAt(0) <= '9'){

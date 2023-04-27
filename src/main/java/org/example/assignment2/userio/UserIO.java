@@ -1,4 +1,14 @@
-package StudentPackage;
+package org.example.assignment2.userio;
+
+import org.example.assignment2.deleting.DeletingStudents;
+import org.example.assignment2.exceptionhandling.BadDataEnteredException;
+import org.example.assignment2.sort.SortByRollNo;
+import org.example.assignment2.sort.SortByAddress;
+import org.example.assignment2.sort.SortByAge;
+import org.example.assignment2.sort.SortByName;
+import org.example.assignment2.storage.FileInputOutputInstance;
+import org.example.assignment2.student.Student;
+import org.example.assignment2.exceptionhandling.Validation;
 
 import java.io.IOException;
 import java.net.BindException;
@@ -154,7 +164,7 @@ public class UserIO {
 //        FileInputOutput.saveStudentDetailsInFile(student);
     }
 
-   static void displayWithSortOption(){
+   public static void displayWithSortOption(){
         System.out.println("Enter the way you want to sort as you like ");
         System.out.println("1. Age");
         System.out.println("2. Name");
@@ -177,7 +187,7 @@ public class UserIO {
         }
     }
 
-    static void displayDetails(){
+    public static void displayDetails(){
         System.out.println("----------------------------------------------------------");
         System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
         System.out.println("----------------------------------------------------------");
@@ -187,7 +197,7 @@ public class UserIO {
         }
     }
 
-    static void deleteParticularStudent(){
+    public static void deleteParticularStudent(){
         Scanner sc = new Scanner(System.in);
         String finishDeleting = "";
         while (!(finishDeleting.equals("y"))) {

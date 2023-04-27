@@ -1,4 +1,4 @@
-package StudentPackage;
+package org.example.assignment2.student;
 
 import java.util.Queue;
 import java.io.Serializable;

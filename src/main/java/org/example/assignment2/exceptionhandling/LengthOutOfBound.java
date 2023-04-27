@@ -1,4 +1,4 @@
-package StudentPackage;
+package org.example.assignment2.exceptionhandling;
 
 public class LengthOutOfBound extends Exception{
     String lengthEnteredByUser;

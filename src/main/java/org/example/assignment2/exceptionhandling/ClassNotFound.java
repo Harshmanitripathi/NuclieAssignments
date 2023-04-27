@@ -1,4 +1,4 @@
-package StudentPackage;
+package org.example.assignment2.exceptionhandling;
 
 public class ClassNotFound extends Exception{
     String errorInClass;

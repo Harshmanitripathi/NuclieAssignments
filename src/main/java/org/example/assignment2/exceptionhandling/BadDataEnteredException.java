@@ -1,9 +1,9 @@
-package StudentPackage;
+package org.example.assignment2.exceptionhandling;
 
 public class BadDataEnteredException extends Exception{
 
     String errorCameFromEnteringBadData;
-     BadDataEnteredException(String errorCameFromEnteringBadData){
+     public BadDataEnteredException(String errorCameFromEnteringBadData){
         this.errorCameFromEnteringBadData = errorCameFromEnteringBadData;
     }
 

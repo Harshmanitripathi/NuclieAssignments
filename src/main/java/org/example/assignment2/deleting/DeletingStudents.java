@@ -1,4 +1,6 @@
-package StudentPackage;
+package org.example.assignment2.deleting;
+
+import org.example.assignment2.student.Student;
 
 import java.util.*;
 

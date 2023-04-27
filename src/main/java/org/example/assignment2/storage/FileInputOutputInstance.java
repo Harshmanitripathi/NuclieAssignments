@@ -1,4 +1,4 @@
-package StudentPackage;
+package org.example.assignment2.storage;
 
 import java.io.*;
 
