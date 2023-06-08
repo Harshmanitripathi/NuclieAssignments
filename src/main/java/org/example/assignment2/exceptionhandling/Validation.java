@@ -49,9 +49,9 @@ public class Validation extends Exception{
                 if (nameOfStudent.charAt(0) >= '0' && nameOfStudent.charAt(0) <= '9'){
 
                     throw new BadDataEnteredException("Name should not start with Digit");}
-                if (nameOfStudent.charAt(0) >= 'a' && nameOfStudent.charAt(0) <= 'z'){
-
-                    throw new BadDataEnteredException("Name should not start with Small Alphabets");}
+//                if (nameOfStudent.charAt(0) >= 'a' && nameOfStudent.charAt(0) <= 'z'){
+//
+//                    throw new BadDataEnteredException("Name should not start with Small Alphabets");}
 
                 int checkForSpace = 0;
                 for (int j = 0; j < nameOfStudent.length(); j++) {

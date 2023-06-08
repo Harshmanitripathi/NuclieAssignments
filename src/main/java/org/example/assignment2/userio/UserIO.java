@@ -6,7 +6,8 @@ import org.example.assignment2.sort.SortByRollNo;
 import org.example.assignment2.sort.SortByAddress;
 import org.example.assignment2.sort.SortByAge;
 import org.example.assignment2.sort.SortByName;
-import org.example.assignment2.storage.FileInputOutputInstance;
+import org.example.assignment2.storage.SerializationExample;
+import org.example.assignment2.storage.DeserializationExample;
 import org.example.assignment2.student.Student;
 import org.example.assignment2.exceptionhandling.Validation;
 
@@ -17,8 +18,45 @@ import java.io.*;
 import java.util.Comparator;
 public class UserIO {
    static Student[] student;
+   static Student[] modifiedStudentDetail;
+   public static boolean userBenefits() throws IOException {
+       Scanner sc = new Scanner(System.in);
+       boolean checkForBenefit = false;
+       while (!checkForBenefit) {
+           System.out.println("1. Add User details.");
+           System.out.println("2. Display User details.");
+           System.out.println("3. Delete User details.");
+           System.out.println("4. Save User details.");
+           System.out.println("5. Exit.");
+           String userInputForBenefits = sc.next();
+           switch (userInputForBenefits) {
+               case "1":
+                   takeInputFromUser();
+                   break;
+               case "2":
+                   DeserializationExample.deserializedDataOfStudent("student_details.ser");
+                   break;
+               case "3":
+                   deleteParticularStudent();
+                   break;
+               case "4":
+                   if (student != null) {
+                       SerializationExample.saveStudentDetails(student, "student_details.ser");
+                   } else {
+                       System.out.println("Press 1 to enter data, there is nothing to save");
+                   }
+                   break;
+               case "5":
+                   checkForBenefit = true;
+                   break;
+               default:
+                   System.out.println("Enter 1-5 ");
+                   break;
+           }
+       }
+       return checkForBenefit;
+   }
     public static void takeInputFromUser() throws IOException {
-
 //        Taking Input from user Starts over here
         Scanner sc = new Scanner(System.in);
         String noOfStudents1="";
@@ -94,7 +132,7 @@ public class UserIO {
             }
 
 
-            System.out.println("enter the courses name whom you want to take , enter done when its over");
+            System.out.println("enter the courses name whom you want to take , enter (Y) when its over");
 
 
                 int k=0;
@@ -138,32 +176,36 @@ public class UserIO {
 
 //        Using singleton class to store data
 //        serialize the data in singleton class
-        byte[] serialized = FileInputOutputInstance.getInstance().serializeData();
-        FileInputOutputInstance.getInstance().setDataininstringform(student);
+//        byte[] serialized = FileInputOutputInstance.getInstance().serializeData();
+//        FileInputOutputInstance.getInstance().setDataininstringform(student);
 
 //        de-serialize the data in singleton class
-        try {
-            Object[] serializedData = FileInputOutputInstance.getInstance().getDataininstringform();
-            FileInputOutputInstance.getInstance().deserialize(serialized);
-            System.out.println("----------------------------------------------------------");
-            System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
-            System.out.println("----------------------------------------------------------");
-
-            for (int i = 0; i < serializedData.length; i++) {
-                if (serializedData[i] == null)break;
-                System.out.println(serializedData[i].toString());
-            }
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-
+//        try {
+//            Object[] serializedData = FileInputOutputInstance.getInstance().getDataininstringform();
+//            FileInputOutputInstance.getInstance().deserialize(serialized);
+//            System.out.println("----------------------------------------------------------");
+//            System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
+//            System.out.println("----------------------------------------------------------");
+//
+//            for (int i = 0; i < serializedData.length; i++) {
+//                if (serializedData[i] == null)break;
+//                System.out.println(serializedData[i].toString());
+//            }
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//        SerializationExample.saveStudentDetails(student,"student_details.ser");
+//        DeserializationExample.deserializedDataOfStudent("student_details.ser");
+        DeserializationExample.addingNewDataInStudentList("student_details.ser");
+        displayWithSortOption();
 
 
 
 //        FileInputOutput.saveStudentDetailsInFile(student);
     }
-
+    public static Student[] getStudentDetails() {
+       return student;
+    }
    public static void displayWithSortOption(){
         System.out.println("Enter the way you want to sort as you like ");
         System.out.println("1. Age");
@@ -175,15 +217,24 @@ public class UserIO {
         switch (sortBy) {
             case 1:
                 Arrays.sort(student, new SortByAge());
+                SerializationExample.saveStudentDetails(student,"student_details.ser");
+                DeserializationExample.deserializedDataOfStudent("student_details.ser");
                 break;
             case 2:
                 Arrays.sort(student, new SortByName());
+                SerializationExample.saveStudentDetails(student,"student_details.ser");
+                DeserializationExample.deserializedDataOfStudent("student_details.ser");
                 break;
             case 3:
                 Arrays.sort(student, new SortByRollNo());
+                SerializationExample.saveStudentDetails(student,"student_details.ser");
+                DeserializationExample.deserializedDataOfStudent("student_details.ser");
                 break;
             case 4:
                 Arrays.sort(student, new SortByAddress());
+                SerializationExample.saveStudentDetails(student,"student_details.ser");
+                DeserializationExample.deserializedDataOfStudent("student_details.ser");
+                break;
         }
     }
 
@@ -200,14 +251,15 @@ public class UserIO {
     public static void deleteParticularStudent(){
         Scanner sc = new Scanner(System.in);
         String finishDeleting = "";
-        while (!(finishDeleting.equals("y"))) {
+
             System.out.println("Enter the rollno you want to delete");
             int rollNoToBeDeleted = sc.nextInt();
             boolean checkForRollNo = false;
-            DeletingStudents.studentDeleted(student,rollNoToBeDeleted, checkForRollNo);
-            System.out.println("If you are done deleting type y else type no");
-            finishDeleting = sc.next();
-        }
+            DeserializationExample.deserializationForDeleting("student_details.ser",rollNoToBeDeleted);
+//            DeletingStudents.studentDeleted(student,rollNoToBeDeleted, checkForRollNo);
+//            System.out.println("If you are done deleting type y else type no");
+//            finishDeleting = sc.next();
+
     }
 
 }
