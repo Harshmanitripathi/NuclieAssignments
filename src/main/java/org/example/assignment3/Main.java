@@ -1,4 +1,4 @@
-package Tree;
+package org.example.assignment3;
 
 import java.util.Scanner;
 

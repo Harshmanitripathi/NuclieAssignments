@@ -1,4 +1,4 @@
-package Tree;
+package org.example.assignment3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +46,7 @@ public class Graph {
                     for (int showPath: pathForParent) {
                         System.out.print(showPath+"->");
                     }
+                    System.out.println();
                     return;
                 }
                 pathForParent.add(node);

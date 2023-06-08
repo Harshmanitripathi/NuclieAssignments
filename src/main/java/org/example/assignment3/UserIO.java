@@ -1,4 +1,4 @@
-package Tree;
+package org.example.assignment3;
 
 import java.util.*;
 
@@ -13,7 +13,7 @@ public class UserIO {
         Scanner sc = new Scanner(System.in);
         nodesOfFamilyMember = new ArrayList<Integer>();int maxElement = 1000000;
         while (true) {
-            System.out.println("Enter the nodes you want");
+            System.out.println("Enter the nodes you want, press (Y) to stop");
             String node = sc.next();
             if (node.equalsIgnoreCase("y"))
                 break;
@@ -31,7 +31,7 @@ public class UserIO {
             System.out.println();
             addedgeOfEachNode(source,destination);
             String check = "";
-            System.out.println("If you want to exit , type y");
+            System.out.println("If you want to exit , type (y), type anyother key to continue");
             check = sc.next();
             if(check.equalsIgnoreCase("y"))
                 break;
@@ -69,7 +69,7 @@ public class UserIO {
         }
     }
 
-    static boolean checkCircleInGraph(){
+    public static boolean checkCircleInGraph(){
         int[] vis1 = new int[Collections.max(nodesOfFamilyMember) +1];
         int[] dfsvis = new int[Collections.max(nodesOfFamilyMember) +1];
         for (int i=0;i<vis1.length;i++){
@@ -95,7 +95,7 @@ public class UserIO {
         return false;
     }
 
-    static void displayParent() {
+    public static void displayParent() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the nodes whom you want parents");
         int nodeForPrents = sc.nextInt();
