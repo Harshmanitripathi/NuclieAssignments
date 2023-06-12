@@ -5,15 +5,25 @@ import org.example.assignment4.itemlist.TaxUpdatedItem;
 
 import java.util.List;
 
-public class calculateTax implements Runnable{
+public class CalculateTax extends Thread{
     public List<Items> itemList;
     public List<TaxUpdatedItem> taxUpdatedItemList;
-    public calculateTax(List<Items> itemList, List<TaxUpdatedItem> taxUpdatedItemList) {
+    public CalculateTax(List<Items> itemList, List<TaxUpdatedItem> taxUpdatedItemList) {
         this.itemList = itemList;
         this.taxUpdatedItemList = taxUpdatedItemList;
     }
     @Override
     public void run() {
+        if (itemList.size() == taxUpdatedItemList.size()) {
+            while (itemList.size() == taxUpdatedItemList.size()) {
+                try {
+                    wait();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
+            }
+        }
         for (Items items: itemList) {
             double priceOfItem = items.getPriceOfItem();
             int quantityOfITem = items.getQuantityOofItem();
@@ -21,24 +31,24 @@ public class calculateTax implements Runnable{
             double priceWithAddedTax=0.00;
             if (typeOfItem.equalsIgnoreCase("Raw")){
                 priceWithAddedTax = priceOfItem * quantityOfITem;
-                priceWithAddedTax = (priceWithAddedTax * 1.125);
+                priceWithAddedTax = (priceOfItem * 12.5)/100;
             }
             else if (typeOfItem.equalsIgnoreCase("Manufactured")){
                 priceWithAddedTax = priceOfItem * quantityOfITem;
-                priceWithAddedTax = ((priceWithAddedTax * .125) + priceWithAddedTax)*1.02;
+                priceWithAddedTax = ((priceOfItem * 12.5)/100 + priceOfItem) * 2/100 + priceOfItem;
             }
             else if (typeOfItem.equalsIgnoreCase("Imported")) {
                 priceWithAddedTax = priceOfItem * quantityOfITem;
-                priceWithAddedTax = priceWithAddedTax * 1.10;
+                priceWithAddedTax = priceOfItem * 10/100 + priceOfItem;
                 if (priceWithAddedTax <= 100) {
                     priceWithAddedTax += 5;
                 } else if (priceWithAddedTax > 100 && priceWithAddedTax <= 200) {
                     priceWithAddedTax += 10;
                 } else {
-                    priceWithAddedTax = (priceWithAddedTax * 1.05);
+                    priceWithAddedTax = (priceWithAddedTax * 5)/100 + priceWithAddedTax;
                 }
             }
-            double taxPrice = priceWithAddedTax - priceOfItem*quantityOfITem;
+            double taxPrice = priceWithAddedTax - priceOfItem;
             TaxUpdatedItem taxUpdatedItem = new TaxUpdatedItem(items.getNameOfItem(),priceOfItem,taxPrice,priceWithAddedTax);
             taxUpdatedItemList.add(taxUpdatedItem);
         }

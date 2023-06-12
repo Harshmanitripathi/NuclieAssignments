@@ -1,9 +1,10 @@
 package org.example.assignment4.itemlist;
 
 public class TaxUpdatedItem {
-    public String nameOfItem = "";
-    public double priceOfItem = 0.00;
-    public double taxprice = 0.00, totalPriceOfItem = 0.00;
+    private String nameOfItem = "";
+    private double priceOfItem = 0.00;
+    private double taxprice = 0.00;
+    private double totalPriceOfItem = 0.00;
 
     public String getNameOfItem() {
         return nameOfItem;
